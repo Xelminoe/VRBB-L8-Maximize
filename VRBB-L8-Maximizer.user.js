@@ -1381,11 +1381,16 @@ function wrapper(plugin_info) {
     // ========== Button Injection ==========
     plugin.injectButton = function () {
         if ($('#vrbb-helper-btn').length > 0) return;
-
-        $('#toolbox').append(
-            `<a id="vrbb-helper-btn" onclick="window.plugin.vrbbL8Maximizer.onButtonClick()" title="VRBB L8 Planner">VRBB-Plan</a>`
-    );
+    
+        const button = $('<a>')
+            .attr('id', 'vrbb-helper-btn')
+            .attr('title', 'VRBB L8 Planner')
+            .text('VRBB-Plan')
+            .on('click', () => plugin.onButtonClick());
+    
+        $('#toolbox').append(button);
     };
+
 
     plugin.onButtonClick = function () {
         const updatestatus = document.getElementById('updatestatus');
