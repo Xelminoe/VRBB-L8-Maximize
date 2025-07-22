@@ -1062,7 +1062,7 @@ function wrapper(plugin_info) {
       position: absolute;
       top: 80px;
       right: 20px;
-      width: 300px;
+      width: 400px;
       background: #ffffffee;
       border: 1px solid #888;
       padding: 10px;
@@ -1070,6 +1070,8 @@ function wrapper(plugin_info) {
       z-index: 9999;
       border-radius: 6px;
       box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      max-width: 95vw;
+      box-sizing: border-box;
     ">
       <div style="text-align: right;">
         <button id="vrbb-helper-close" style="border: none; background: none; font-size: 16px; cursor: pointer;">✖</button>
@@ -1194,7 +1196,7 @@ function wrapper(plugin_info) {
           position: absolute;
           top: 80px;
           right: 20px;
-          width: 300px;
+          width: 400px;
           background: #ffffffee;
           border: 1px solid #888;
           padding: 10px;
@@ -1202,6 +1204,8 @@ function wrapper(plugin_info) {
           z-index: 9999;
           border-radius: 6px;
           box-shadow: 0 0 5px rgba(0,0,0,0.2);
+          max-width: 95vw;
+          box-sizing: border-box;
           ">
           <div style="text-align: right;">
             <button id="vrbb-strategy-close" style="border: none; background: none; font-size: 16px; cursor: pointer;">✖</button>
