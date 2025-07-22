@@ -951,8 +951,8 @@ function wrapper(plugin_info) {
           <option value="R" ${agent.team === 'R' ? 'selected' : ''}>RES</option>
           <option value="E" ${agent.team === 'E' ? 'selected' : ''}>ENL</option>
         </select>
-        <label><input type="checkbox" ${agent.active ? 'checked' : ''}/> <div class="vrbb-text">Active</div></label>
-        <label><input type="checkbox" ${agent.useVrbb ? 'checked' : ''}/> <div class="vrbb-text">VRBB</div></label>
+        <label class="vrbb-text"><input type="checkbox" ${agent.active ? 'checked' : ''}/> Active </label>
+        <label class="vrbb-text"><input type="checkbox" ${agent.useVrbb ? 'checked' : ''}/> VRBB </label>
       </div>
     `);
 
@@ -1099,7 +1099,7 @@ function wrapper(plugin_info) {
                 </div>
         
                 <div style="margin-top:10px;">
-                  <label><input type="checkbox" id="vrbb-double-reso" /> <div class="vrbb-text">Double Resonator Bonus Active</div>
+                  <label class="vrbb-text"><input type="checkbox" id="vrbb-double-reso" />Double Resonator Bonus Active
                   </label>
                 </div>
         
@@ -1357,7 +1357,7 @@ function wrapper(plugin_info) {
             const nav = $(`
             <div style="margin-top: 10px;">
                 <button id="vrbb-prev-status" ${idx === 0 ? 'disabled' : ''}>&lt;=</button>
-                <span style="margin: 0 10px;"> <div class="vrbb-text"> ${idx + 1} / ${statusHistory.length} </div></span>
+                <span class="vrbb-text" style="margin: 0 10px;">  ${idx + 1} / ${statusHistory.length} </span>
                 <button id="vrbb-next-status" ${idx === statusHistory.length - 1 ? 'disabled' : ''}>=&gt;</button>
             </div>
         `);
