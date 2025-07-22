@@ -1,8 +1,5 @@
-
-    if (typeof window.plugin !== 'function') window.plugin = () => {};
-    window.plugin.vrbbL8Maximizer = {};
-
-    const plugin = window.plugin.vrbbL8Maximizer;
+(function() {
+    const plugin = {};
 
     plugin.strategyLibrary = [
         {
@@ -1043,54 +1040,39 @@
         plugin._resonatorDraft = Array(8).fill(null);
         plugin.draftAgentList = plugin.buildInitialAgentListFromResonators();
 
-        const panel = $(`
-    <div id="vrbb-helper-panel" style="
-      position: absolute;
-      top: 80px;
-      right: 20px;
-      width: 400px;
-      background: #ffffffee;
-      border: 1px solid #888;
-      padding: 10px;
-      font-size: 13px;
-      z-index: 9999;
-      border-radius: 6px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    ">
-      <div style="text-align: right;">
-        <button id="vrbb-helper-close" style="border: none; background: none; font-size: 16px; cursor: pointer;">✖</button>
-      </div>
-      <div id="vrbb-helper-content">
-        <b>VRBB Resonator Planner</b>
-
-        <div id="vrbb-resonator-panel" style="margin-top:10px;">
-          <b>Resonator Ownership</b>
-          <div id="vrbb-reso-table"></div>
-        </div>
-
-        <div style="margin-top:10px;">
-          <label><input type="checkbox" id="vrbb-double-reso" /> Double Resonator Bonus Active</label>
-        </div>
-
-        <div id="vrbb-agent-list" style="margin-top:10px;">
-          <b>Agent List</b>
-          <div id="vrbb-agent-table"></div>
-          <button id="vrbb-add-agent" style="margin-top:5px;">Add Agent</button>
-        </div>
-
-        <div style="margin-top:10px; text-align:right;">
-          <button id="vrbb-confirm-init">Confirm Initialization</button>
-        </div>
-      </div>
-    </div>
-  `);
-
-        $('body').append(panel);
-        $('#vrbb-helper-panel').draggable();
-
-        $('#vrbb-helper-close').on('click', () => {
-            $('#vrbb-helper-panel').remove();
-        });
+        $('#main').html(`
+          <div id="vrbb-helper-panel" style="
+            background: #ffffffee;
+            border: 1px solid #888;
+            padding: 10px;
+            font-size: 13px;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+          ">
+            <div id="vrbb-helper-content">
+              <b>VRBB Resonator Planner</b>
+        
+              <div id="vrbb-resonator-panel" style="margin-top:10px;">
+                <b>Resonator Ownership</b>
+                <div id="vrbb-reso-table"></div>
+              </div>
+        
+              <div style="margin-top:10px;">
+                <label><input type="checkbox" id="vrbb-double-reso" /> Double Resonator Bonus Active</label>
+              </div>
+        
+              <div id="vrbb-agent-list" style="margin-top:10px;">
+                <b>Agent List</b>
+                <div id="vrbb-agent-table"></div>
+                <button id="vrbb-add-agent" style="margin-top:5px;">Add Agent</button>
+              </div>
+        
+              <div style="margin-top:10px; text-align:right;">
+                <button id="vrbb-confirm-init">Confirm Initialization</button>
+              </div>
+            </div>
+          </div>
+        `);
 
         $('#vrbb-add-agent').off('click').on('click', () => {
             plugin.draftAgentList.push({ name: '', team: 'R', active: true, useVrbb: false });
@@ -1174,33 +1156,28 @@
         const vrbbName = vrbbAgent.name;
         const vrbbTeam = vrbbAgent.team;
 
-        $('#vrbb-strategy-panel').remove();
-        $('body').append(`
-        <div id="vrbb-strategy-panel" style="
-          position: absolute;
-          top: 80px;
-          right: 20px;
-          width: 400px;
-          background: #ffffffee;
-          border: 1px solid #888;
-          padding: 10px;
-          font-size: 13px;
-          z-index: 9999;
-          border-radius: 6px;
-          box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        const panelContainer = $('#vrbb-strategy-panel');
+        panelContainer.empty();
+    
+        // 主面板框架
+        const panel = $(`
+          <div style="
+            background: #ffffffee;
+            border: 1px solid #888;
+            padding: 10px;
+            font-size: 13px;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
           ">
-          <div style="text-align: right;">
-            <button id="vrbb-strategy-close" style="border: none; background: none; font-size: 16px; cursor: pointer;">✖</button>
+            <div id="vrbb-strategy-summary-list">
+              <b>Valid Strategy List</b>
+            </div>
+            <hr/>
+            <div id="vrbb-strategy-details"></div>
           </div>
-          <div id="vrbb-strategy-summary-list">
-            <b>Valid Strategy List</b>
-          </div>
-          <hr/>
-          <div id="vrbb-strategy-details">
-            <b>Strategy Details</b>
-          </div>
-        </div>`);
-        $('#vrbb-strategy-panel').draggable();
+        `);
+    
+        panelContainer.append(panel);
 
         if (!document.getElementById('vrbb-strategy-style')) {
             $('head').append(`
@@ -1223,7 +1200,6 @@
         </style>
     `);
         }
-
 
         const summaryList = $('#vrbb-strategy-summary-list');
         summaryList.empty();
@@ -1364,38 +1340,8 @@
         }
     };
 
-    // ========== Button Injection ==========
-    plugin.injectButton = function () {
-        if ($('#vrbb-helper-btn').length > 0) return;
+    $(document).ready(() => {
+      plugin.createUIPanel();
+    });
 
-        $('#toolbox').append(
-            `<a id="vrbb-helper-btn" onclick="window.plugin.vrbbL8Maximizer.onButtonClick()" title="VRBB L8 Planner">VRBB-Plan</a>`
-    );
-    };
-
-    plugin.onButtonClick = function () {
-        const updatestatus = document.getElementById('updatestatus');
-        if (updatestatus && getComputedStyle(updatestatus).display === 'none') {
-            const observer = new MutationObserver(() => {
-                if (getComputedStyle(updatestatus).display === 'block') {
-                    observer.disconnect();
-                    plugin.createUIPanel();
-                }
-            });
-            observer.observe(updatestatus, { attributes: true, attributeFilter: ['style'] });
-        } else {
-            plugin.createUIPanel();
-        }
-    };
-
-    // ========== Setup ==========
-    plugin.setup = function () {
-        plugin.injectButton();
-    };
-
-    // ========== Register ==========
-    const setup = plugin.setup;
-    setup.info = plugin_info;
-    if (!window.bootPlugins) window.bootPlugins = [];
-    window.bootPlugins.push(setup);
-    if (window.iitcLoaded) setup();
+})();
