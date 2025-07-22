@@ -951,8 +951,12 @@ function wrapper(plugin_info) {
           <option value="R" ${agent.team === 'R' ? 'selected' : ''}>RES</option>
           <option value="E" ${agent.team === 'E' ? 'selected' : ''}>ENL</option>
         </select>
-        <label><input type="checkbox" ${agent.active ? 'checked' : ''}/> Active</label>
-        <label><input type="checkbox" ${agent.useVrbb ? 'checked' : ''}/> VRBB</label>
+        <label><input type="checkbox" ${agent.active ? 'checked' : ''}/> 
+          <div class="vrbb-text">Active</div>
+        </label>
+        <label><input type="checkbox" ${agent.useVrbb ? 'checked' : ''}/> 
+          <div class="vrbb-text">VRBB</div>
+        </label>
       </div>
     `);
 
@@ -1054,52 +1058,68 @@ function wrapper(plugin_info) {
     plugin.createUIPanel = function () {
         if ($('#vrbb-helper-panel').length > 0) return;
 
+        if (!document.getElementById('vrbb-global-style')) {
+            $('head').append(`
+                <style id="vrbb-global-style">
+                    .vrbb-text {
+                        color: #111;
+                        font-family: sans-serif;
+                        font-size: 13px;
+                    }
+                </style>
+            `);
+        }
+
         plugin._resonatorDraft = Array(8).fill(null);
         plugin.draftAgentList = plugin.buildInitialAgentListFromResonators();
 
         const panel = $(`
-    <div id="vrbb-helper-panel" style="
-      position: absolute;
-      top: 80px;
-      right: 20px;
-      width: 400px;
-      background: #ffffffee;
-      border: 1px solid #888;
-      padding: 10px;
-      font-size: 13px;
-      z-index: 9999;
-      border-radius: 6px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
-      max-width: 95vw;
-      box-sizing: border-box;
-    ">
-      <div style="text-align: right;">
-        <button id="vrbb-helper-close" style="border: none; background: none; font-size: 16px; cursor: pointer;">✖</button>
-      </div>
-      <div id="vrbb-helper-content">
-        <b>VRBB Resonator Planner</b>
-
-        <div id="vrbb-resonator-panel" style="margin-top:10px;">
-          <b>Resonator Ownership</b>
-          <div id="vrbb-reso-table"></div>
-        </div>
-
-        <div style="margin-top:10px;">
-          <label><input type="checkbox" id="vrbb-double-reso" /> Double Resonator Bonus Active</label>
-        </div>
-
-        <div id="vrbb-agent-list" style="margin-top:10px;">
-          <b>Agent List</b>
-          <div id="vrbb-agent-table"></div>
-          <button id="vrbb-add-agent" style="margin-top:5px;">Add Agent</button>
-        </div>
-
-        <div style="margin-top:10px; text-align:right;">
-          <button id="vrbb-confirm-init">Confirm Initialization</button>
-        </div>
-      </div>
-    </div>
-  `);
+            <div id="vrbb-helper-panel" style="
+              position: absolute;
+              top: 80px;
+              right: 20px;
+              width: 400px;
+              background: #ffffffee;
+              border: 1px solid #888;
+              padding: 10px;
+              font-size: 13px;
+              z-index: 9999;
+              border-radius: 6px;
+              box-shadow: 0 0 5px rgba(0,0,0,0.2);
+              max-width: 95vw;
+              box-sizing: border-box;
+            ">
+              <div style="text-align: right;">
+                <button id="vrbb-helper-close" style="border: none; background: none; font-size: 16px; cursor: pointer;">✖</button>
+              </div>
+              <div id="vrbb-helper-content">
+                <div class="vrbb-text">
+                  <b>VRBB Resonator Planner</b>
+                </div>
+        
+                <div id="vrbb-resonator-panel" style="margin-top:10px;">
+                  <div class="vrbb-text"><b>Resonator Ownership</b></div>
+                  <div id="vrbb-reso-table"></div>
+                </div>
+        
+                <div style="margin-top:10px;">
+                  <label><input type="checkbox" id="vrbb-double-reso" /> 
+                    <div class="vrbb-text">Double Resonator Bonus Active</div>
+                  </label>
+                </div>
+        
+                <div id="vrbb-agent-list" style="margin-top:10px;">
+                  <div class="vrbb-text"><b>Agent List</b></div>
+                  <div id="vrbb-agent-table"></div>
+                  <button id="vrbb-add-agent" style="margin-top:5px;">Add Agent</button>
+                </div>
+        
+                <div style="margin-top:10px; text-align:right;">
+                  <button id="vrbb-confirm-init">Confirm Initialization</button>
+                </div>
+              </div>
+            </div>
+          `);
 
         $('body').append(panel);
         $('#vrbb-helper-panel').draggable();
