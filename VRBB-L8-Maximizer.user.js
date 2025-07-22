@@ -4,7 +4,7 @@
 // @author         Xelminoe
 // @category       Info
 // @version        1.0
-// @description    Assist planning L8 resonator max-out using VRBB
+// @description    Assist planning L8 resonator max-out using VRBB — e.g. 3 agents from the same side build an L8 portal in 15 minutes.
 // @match          https://intel.ingress.com/*
 // @downloadURL    https://raw.github.com/Xelminoe/VRBB-L8-Maximizer/main/VRBB-L8-Maximizer.user.js
 // @updateURL      https://raw.github.com/Xelminoe/VRBB-L8-Maximizer/main/VRBB-L8-Maximizer.user.js
