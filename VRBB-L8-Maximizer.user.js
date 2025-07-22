@@ -1062,7 +1062,7 @@ function wrapper(plugin_info) {
       position: absolute;
       top: 80px;
       right: 20px;
-      width: 400px;
+      width: 300px;
       background: #ffffffee;
       border: 1px solid #888;
       padding: 10px;
@@ -1194,7 +1194,7 @@ function wrapper(plugin_info) {
           position: absolute;
           top: 80px;
           right: 20px;
-          width: 400px;
+          width: 300px;
           background: #ffffffee;
           border: 1px solid #888;
           padding: 10px;
