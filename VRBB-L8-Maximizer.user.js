@@ -8,6 +8,7 @@
 // @match          https://intel.ingress.com/*
 // @downloadURL    https://raw.github.com/Xelminoe/VRBB-L8-Maximizer/main/VRBB-L8-Maximizer.user.js
 // @updateURL      https://raw.github.com/Xelminoe/VRBB-L8-Maximizer/main/VRBB-L8-Maximizer.user.js
+// @homePage       https://xelminoe.github.io/VRBB-L8-Maximizer/
 // @grant          none
 // ==/UserScript==
 
