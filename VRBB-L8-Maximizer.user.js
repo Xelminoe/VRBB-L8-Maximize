@@ -951,12 +951,8 @@ function wrapper(plugin_info) {
           <option value="R" ${agent.team === 'R' ? 'selected' : ''}>RES</option>
           <option value="E" ${agent.team === 'E' ? 'selected' : ''}>ENL</option>
         </select>
-        <label><input type="checkbox" ${agent.active ? 'checked' : ''}/> 
-          <div class="vrbb-text">Active</div>
-        </label>
-        <label><input type="checkbox" ${agent.useVrbb ? 'checked' : ''}/> 
-          <div class="vrbb-text">VRBB</div>
-        </label>
+        <label><input type="checkbox" ${agent.active ? 'checked' : ''}/> <div class="vrbb-text">Active</div></label>
+        <label><input type="checkbox" ${agent.useVrbb ? 'checked' : ''}/> <div class="vrbb-text">VRBB</div></label>
       </div>
     `);
 
@@ -1103,8 +1099,7 @@ function wrapper(plugin_info) {
                 </div>
         
                 <div style="margin-top:10px;">
-                  <label><input type="checkbox" id="vrbb-double-reso" /> 
-                    <div class="vrbb-text">Double Resonator Bonus Active</div>
+                  <label><input type="checkbox" id="vrbb-double-reso" /> <div class="vrbb-text">Double Resonator Bonus Active</div>
                   </label>
                 </div>
         
@@ -1230,12 +1225,11 @@ function wrapper(plugin_info) {
           <div style="text-align: right;">
             <button id="vrbb-strategy-close" style="border: none; background: none; font-size: 16px; cursor: pointer;">✖</button>
           </div>
-          <div id="vrbb-strategy-summary-list">
-            <b>Valid Strategy List</b>
-          </div>
+          <div class="vrbb-text"><b>VRBB Resonator Planner</b></div>
+          <div id="vrbb-strategy-summary-list"></div>
           <hr/>
+          <div class="vrbb-text"><b>Strategy Details</b></div>
           <div id="vrbb-strategy-details">
-            <b>Strategy Details</b>
           </div>
         </div>`);
         $('#vrbb-strategy-panel').draggable();
@@ -1300,7 +1294,7 @@ function wrapper(plugin_info) {
 
         const statusHistory = result.statusHistory;
         if (!statusHistory || statusHistory.length === 0) {
-            container.append('<div>No status history available.</div>');
+            container.append('<div class="vrbb-text"><div>No status history available.</div></div>');
             return;
         }
 
@@ -1312,7 +1306,7 @@ function wrapper(plugin_info) {
 
             // Header with phase + action
             container.append(`
-            <div style="margin-bottom: 8px;">
+            <div class="vrbb-text" style="margin-bottom: 8px;">
                 <b>Strategy:</b> ${idxStrategy+1} &nbsp;
                 <b>Stage:</b> ${state.stage}
             </div>
@@ -1356,14 +1350,14 @@ function wrapper(plugin_info) {
             container.append(grid);
 
             // Action hint
-            container.append(`<div style="margin-top:6px;"> ⚠️ Confirm L8 resonator numbers as above before next action. </div>`);
-            container.append(`<div style="margin-top:6px;"> <b>Next action </b>: ${plugin.describeAction(state.action, vrbbName, vrbbTeam)}</div>`);
+            container.append(`<div class="vrbb-text" style="margin-top:6px;"> ⚠️ Confirm L8 resonator numbers as above before next action. </div>`);
+            container.append(`<div class="vrbb-text" style="margin-top:6px;"> <b>Next action </b>: ${plugin.describeAction(state.action, vrbbName, vrbbTeam)}</div>`);
 
             // Navigation buttons
             const nav = $(`
             <div style="margin-top: 10px;">
                 <button id="vrbb-prev-status" ${idx === 0 ? 'disabled' : ''}>&lt;=</button>
-                <span style="margin: 0 10px;">${idx + 1} / ${statusHistory.length}</span>
+                <span style="margin: 0 10px;"> <div class="vrbb-text"> ${idx + 1} / ${statusHistory.length} </div></span>
                 <button id="vrbb-next-status" ${idx === statusHistory.length - 1 ? 'disabled' : ''}>=&gt;</button>
             </div>
         `);
