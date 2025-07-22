@@ -1141,8 +1141,6 @@
                 resonators: resonators
             };
 
-            $('#vrbb-helper-panel').remove();
-
             plugin.evaluateAndDisplayStrategies(portalStatus0, agentList, doubleResoEvent, plugin.strategyLibrary);
         });
 
