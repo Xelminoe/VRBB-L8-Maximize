@@ -1038,7 +1038,7 @@
         if ($('#vrbb-helper-panel').length > 0) return;
 
         plugin._resonatorDraft = Array(8).fill(null);
-        plugin.draftAgentList = plugin.buildInitialAgentListFromResonators();
+        plugin.draftAgentList = [];
 
         $('#main').html(`
           <div id="vrbb-helper-panel" style="
