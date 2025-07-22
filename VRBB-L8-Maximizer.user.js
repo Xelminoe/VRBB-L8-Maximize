@@ -1409,7 +1409,15 @@ function wrapper(plugin_info) {
 
     // ========== Setup ==========
     plugin.setup = function () {
-        plugin.injectButton();
+        const tryInject = () => {
+            if ($('#toolbox').length > 0) {
+                plugin.injectButton();
+            } else {
+                // Retry after short delay
+                setTimeout(tryInject, 300);
+            }
+        };
+        tryInject();
     };
 
     // ========== Register ==========
