@@ -1411,18 +1411,7 @@ function wrapper(plugin_info) {
 
 
     plugin.onButtonClick = function () {
-        const updatestatus = document.getElementById('updatestatus');
-        if (updatestatus && getComputedStyle(updatestatus).display === 'none') {
-            const observer = new MutationObserver(() => {
-                if (getComputedStyle(updatestatus).display === 'block') {
-                    observer.disconnect();
-                    plugin.createUIPanel();
-                }
-            });
-            observer.observe(updatestatus, { attributes: true, attributeFilter: ['style'] });
-        } else {
-            plugin.createUIPanel();
-        }
+        plugin.createUIPanel();
     };
 
     // ========== Setup ==========
